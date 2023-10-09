@@ -10,7 +10,7 @@ from src.config import *
 print_lock = threading.Lock()
 msg_array = []
 
-f = open('keys.json', 'r')
+f = open('keys0.json', 'r')
 obj = json.load(f)
 f.close()
 

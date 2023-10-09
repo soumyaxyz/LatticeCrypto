@@ -5,7 +5,7 @@ import json
 from src.roles import IOT
 from src.config import *
 
-f = open('keys.json', 'r')
+f = open('keys3.json', 'r')
 obj = json.load(f)
 f.close()
 
