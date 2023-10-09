@@ -1,15 +1,15 @@
 # LatticeCrypto
 
 ## About
-This project is an implementation of following paper-  
-`https://ieeexplore.ieee.org/abstract/document/10078405`
+This project is an implementation of a paper submited IEEE ICC 24  
 
-It involves communication between laptop and Raspberry Pi for actuating the signature scheme as designed in above paper.
-We use ubuntu OS for all algorithms involving key generation, signing, verfication etc.
+It involves communication between laptop running one or more Cloud Server (SC) and Local Aggregertors (LA) and Raspberry Pi simulating Medical Devices.
+
+The code implemets the PUF enabled post quantum data aggreation scheme proposed in the paper
 
 ## Setup Config.py (src)
 
-- (N) number of IOT devices
+- (N) Total number of entities in the system
 - (f) degree of polynomial - power of 2
 - (p) large prime number
 - (K_min, K_max) range of positive integer < sqrt(p)
@@ -18,14 +18,13 @@ We use ubuntu OS for all algorithms involving key generation, signing, verficati
 ## How to Run
 
 1. Generate Keys  
-`python key_gen.py`  
-Move keys0.json to keys.json at location of server directory.  
-Move keys*i*.json, to the location of *$i^{th}$* client directory.
+`python Main.py`  
+Move CS_id.json the SC. 
+Move LA_id.json the LA.  
+Move Device_id.json the medicical device.
 
-2. Run server on some PORT (eg. 8080)   
-   `python server.py PORT`
+2. Run CS, LA and N-2  devices indepently
+   `python <filename>.py -f <relavent>.json`
 
-3. Run client on the same PORT. Pass the IP_ADDRESS of Server as argument. Use ***127.0.0.1*** to test locally.  
-   `python client.py PORT IP_ADDRESS`
 
-4. Enter message at client terminal prompt.
+

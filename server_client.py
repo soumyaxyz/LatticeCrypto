@@ -11,7 +11,7 @@ class ServerClient():
         self.port = port
         self.address = None
         self.name = name
-        self.N = parallel_incomming
+        self.parallel_incomming = parallel_incomming
         self.print_lock = threading.Lock()
         self.message_size = 16   # bytes
 
@@ -72,13 +72,13 @@ class ServerClient():
         s = socket.socket()
 
         s.bind(('', self.port))
-        s.listen(self.N)
+        s.listen(self.parallel_incomming)
 
         print('{self.name} is listening at port {self.port}')
 
         signal.signal(signal.SIGINT, self.signal_handler)
 
-        self.counter = self.N
+        self.counter = self.parallel_incomming
         while self.counter >0 :
             conn, addr = s.accept()
             self.counter -= 1
@@ -87,14 +87,14 @@ class ServerClient():
     def listen(self):
         s = socket.socket()
         s.bind(('', self.port))
-        s.listen(self.N)
+        s.listen(self.parallel_incomming)
 
         print(f'{self.name} is listening at port {self.port}')
 
         # Register a signal handler for Ctrl+C
         signal.signal(signal.SIGINT, self.signal_handler)
 
-        for _ in range(self.N):
+        for _ in range(self.parallel_incomming):
             conn, addr = s.accept()
             start_new_thread(self.threaded, (conn, addr))
 
